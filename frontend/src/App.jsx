@@ -4,6 +4,10 @@ import AllStudents from "./pages/Student/AllStudents";
 import LandingPage from "./pages/LandingPage";
 import UpdateStudent from "./pages/Student/UpdateStudent";
 import AddLecturer from "./pages/Lecturer/AddLecturer";
+import AllLecturers from "./pages/Lecturer/AllLecturers";
+import AddCourse from "./pages/Course/AddCourse";
+import AllCourses from "./pages/Course/AllCourses";
+import AssignmentPage from "./pages/assignments/AssignmentPage";
 
 const App = () => {
   return (
@@ -15,9 +19,16 @@ const App = () => {
         <Route path="/updatestudent/:id" element={<UpdateStudent />} />
 
         <Route path="/lecturers" element={<AddLecturer />} />
-        {/* <Route path="/alllecturers" element={<AllStudents />} />
-        <Route path="/updatelecturer/:id" element={<UpdateStudent />} /> */}
+       <Route path="/alllecturers" element={<AllLecturers />} />
+        <Route path="/updatelecturer/:id" element={<UpdateStudent />} /> 
+
+        <Route path="/courses" element={<AddCourse />} />
+        <Route path="/allcourses" element={<AllCourses />} />
+
+        <Route path="/assignments" element={<AssignmentPage />} />
       </Routes>
+
+     
     </Router>
   );
 };

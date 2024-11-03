@@ -14,6 +14,24 @@ const Sidebar = () => {
         <li className="p-4 hover:bg-gray-700">
           <Link to="/lecturers">Add Lecturer</Link>
         </li>
+        <li className="p-4 hover:bg-gray-700">
+          <Link to="/alllecturers">All Lecturer</Link>
+        </li>
+        <li className="p-4 hover:bg-gray-700">
+          <Link to="/courses">Add Course</Link>
+        </li>
+        <li className="p-4 hover:bg-gray-700">
+          <Link to="/allcourses">All Courses</Link>
+        </li>
+        <li className="p-4 hover:bg-gray-700">
+          <Link to="/">Enrollments</Link>
+        </li>
+        <li className="p-4 hover:bg-gray-700">
+          <Link to="/assignments">Assign Lecturers</Link>
+        </li>
+        <li className="p-4 hover:bg-gray-700">
+          <Link to="/">Logout</Link>
+        </li>
       </ul>
     </div>
   );

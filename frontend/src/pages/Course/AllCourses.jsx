@@ -1,17 +1,17 @@
-import LecturerList from "../../components/LecturerList";
+import CoursesList from "../../components/CoursesList";
 import Sidebar from "../../components/Sidebar";
 
-const AllLecturers = () => {
+const AllCourses = () => {
   return (
     <div className="flex min-h-screen bg-gray-100">
       <Sidebar />
      
         <div className="max-w-5xl mx-auto bg-white ">
-          <LecturerList />
+          <CoursesList />
         </div>
       
     </div>
   );
 };
 
-export default AllLecturers;
+export default AllCourses;
