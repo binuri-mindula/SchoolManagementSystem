@@ -3,13 +3,10 @@ package com.SchoolManagementSystem.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.List;
-
 @Entity
 @Table(name = "students")
 @Data
 public class Student {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -20,7 +17,4 @@ public class Student {
 
     // Path to pdf file
     private String birth_certificate;
-
 }
-
-
