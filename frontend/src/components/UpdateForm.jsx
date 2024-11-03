@@ -32,17 +32,17 @@ const UpdateForm = () => {
     setStudent({ ...student, [name]: value });
   };
 
-  // Handle file input change
+  
   const handleFileChange = (e) => {
-    setBirth_certificateFile(e.target.files[0]); // Set the selected file
+    setBirth_certificateFile(e.target.files[0]); 
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(); // Create FormData to send the student info and file
-    formData.append("student", JSON.stringify(student)); // Append student data
+    const formData = new FormData(); 
+    formData.append("student", JSON.stringify(student)); 
     if (birth_certificateFile) {
-      formData.append("file", birth_certificateFile); // Append the selected file
+      formData.append("file", birth_certificateFile); 
     }
 
     try {
@@ -117,8 +117,8 @@ const UpdateForm = () => {
             {/* <label className="block text-sm font-medium text-gray-700">Birth Certificate (PDF)</label> */}
             <input
               type="file"
-              accept="application/pdf" // Ensure only PDF files can be selected
-              onChange={handleFileChange} // Update the file state
+              accept="application/pdf" 
+              onChange={handleFileChange} 
               className="border border-gray-300 rounded p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
