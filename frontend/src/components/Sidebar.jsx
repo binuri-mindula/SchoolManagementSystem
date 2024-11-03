@@ -24,7 +24,7 @@ const Sidebar = () => {
           <Link to="/allcourses">All Courses</Link>
         </li>
         <li className="p-4 hover:bg-gray-700">
-          <Link to="/">Enrollments</Link>
+          <Link to="/enrollments">Enrollments</Link>
         </li>
         <li className="p-4 hover:bg-gray-700">
           <Link to="/assignments">Assign Lecturers</Link>

@@ -8,6 +8,7 @@ import AllLecturers from "./pages/Lecturer/AllLecturers";
 import AddCourse from "./pages/Course/AddCourse";
 import AllCourses from "./pages/Course/AllCourses";
 import AssignmentPage from "./pages/assignments/AssignmentPage";
+import EnrollmentPage from "./pages/enrollments/EnrollmentPage";
 
 const App = () => {
   return (
@@ -26,6 +27,8 @@ const App = () => {
         <Route path="/allcourses" element={<AllCourses />} />
 
         <Route path="/assignments" element={<AssignmentPage />} />
+
+        <Route path="/enrollments" element={<EnrollmentPage />} />
       </Routes>
 
      
