@@ -8,9 +8,9 @@ const UpdateForm = () => {
     name: "",
     age: "",
     address: "",
-    gender: "",
-    birth_certificate: ""
+    gender: ""
   });
+  const [birth_certificateFile, setBirth_certificateFile] = useState(null); 
   const [statusMessage, setStatusMessage] = useState(null);
   const navigate = useNavigate();
 
@@ -32,10 +32,25 @@ const UpdateForm = () => {
     setStudent({ ...student, [name]: value });
   };
 
+  // Handle file input change
+  const handleFileChange = (e) => {
+    setBirth_certificateFile(e.target.files[0]); // Set the selected file
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData(); // Create FormData to send the student info and file
+    formData.append("student", JSON.stringify(student)); // Append student data
+    if (birth_certificateFile) {
+      formData.append("file", birth_certificateFile); // Append the selected file
+    }
+
     try {
-      await axios.put(`http://localhost:8080/students/update/${id}`, student);
+      await axios.put(`http://localhost:8080/students/update/${id}`, formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
       setStatusMessage("Student updated successfully!");
       setTimeout(() => navigate("/students"), 2000);
     } catch (error) {
@@ -98,15 +113,15 @@ const UpdateForm = () => {
             required
             className="border border-gray-300 rounded p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <input
-            type="text"
-            name="birth_certificate"
-            placeholder="Birth Certificate Path"
-            value={student.birth_certificate}
-            onChange={handleChange}
-            required
-            className="border border-gray-300 rounded p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-          />
+          <div>
+            {/* <label className="block text-sm font-medium text-gray-700">Birth Certificate (PDF)</label> */}
+            <input
+              type="file"
+              accept="application/pdf" // Ensure only PDF files can be selected
+              onChange={handleFileChange} // Update the file state
+              className="border border-gray-300 rounded p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
           <button
             type="submit"
             className="w-full bg-blue-600 text-white font-bold py-3 rounded hover:bg-blue-700 transition duration-300"

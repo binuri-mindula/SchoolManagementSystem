@@ -21,10 +21,10 @@ function LandingPage() {
 
                 <div className="relative bg-blue-100 text-gray-800 py-20 px-6 md:px-12 h-screen" 
                      style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-                    {/* Background Overlay */}
-                    <div className="absolute inset-0 bg-black opacity-50"></div>
+                   
+                    <div className="absolute inset-0 bg-black opacity-70"></div>
                     
-                    {/* Content on top of the overlay */}
+              
                     <div className="relative container mx-auto text-center z-10">
                         <h3 className="text-3xl md:text-8xl font-semibold mb-4 text-white">
                             Welcome to Akura
