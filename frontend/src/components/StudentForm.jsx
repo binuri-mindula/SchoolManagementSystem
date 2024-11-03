@@ -7,10 +7,10 @@ const StudentForm = () => {
     name: "",
     age: "",
     address: "",
-    gender: "",
-    birth_certificate: ""
+    gender: ""
   });
-
+  
+  const [birth_certificateFile, setBirth_certificateFile] = useState(null); 
   const [statusMessage, setStatusMessage] = useState(null);
   const [statusType, setStatusType] = useState("");
   const navigate = useNavigate();
@@ -20,19 +20,32 @@ const StudentForm = () => {
     setStudent({ ...student, [name]: value });
   };
 
+  
+  const handleFileChange = (e) => {
+    setBirth_certificateFile(e.target.files[0]); 
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData(); 
+    formData.append("student", JSON.stringify(student)); 
+    formData.append("file", birth_certificateFile); 
+
     try {
-      await axios.post("http://localhost:8080/students/add", student);
+      await axios.post("http://localhost:8080/students/add", formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      });
       setStatusMessage("Student added successfully!");
       setStatusType("success");
       setStudent({
         name: "",
         age: "",
         address: "",
-        gender: "",
-        birth_certificate: ""
+        gender: ""
       });
+      setBirth_certificateFile(null); 
       setTimeout(() => navigate("/students"), 2000);
     } catch (error) {
       setStatusMessage("Error adding student. Please try again.");
@@ -110,13 +123,11 @@ const StudentForm = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">Birth Certificate Path</label>
+            <label className="block text-sm font-medium text-gray-700">Birth Certificate (PDF)</label>
             <input
-              type="text"
-              name="birth_certificate"
-              placeholder="Enter birth certificate path"
-              value={student.birth_certificate}
-              onChange={handleChange}
+              type="file"
+              accept="application/pdf" 
+              onChange={handleFileChange} 
               required
               className="mt-1 block w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
             />
