@@ -20,7 +20,7 @@ public class StudentController {
 
     @PostMapping("/add")
     public Student addStudent(@RequestParam("student") String studentJson, @RequestParam("file") MultipartFile file) {
-        // Convert the JSON string to a Student object
+
         ObjectMapper objectMapper = new ObjectMapper();
         Student student;
         try {
@@ -29,7 +29,7 @@ public class StudentController {
             throw new RuntimeException("Failed to parse student data: " + e.getMessage());
         }
 
-        // Upload the file and set the file name in the student object
+
         try {
             String fileName = studentService.uploadFile(file);
             student.setBirth_certificate(fileName);
@@ -51,9 +51,31 @@ public class StudentController {
     }
 
     @PutMapping("/update/{id}")
-    public Student updateStudent(@PathVariable Integer id, @RequestBody Student studentDetails) {
-        return studentService.updateStudent(id, studentDetails);
+    public Student updateStudent(@PathVariable Integer id,
+                                 @RequestParam("student") String studentJson,
+                                 @RequestParam(value = "file", required = false) MultipartFile file) {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        Student student;
+        try {
+            student = objectMapper.readValue(studentJson, Student.class);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to parse student data: " + e.getMessage());
+        }
+
+
+        if (file != null && !file.isEmpty()) {
+            try {
+                String fileName = studentService.uploadFile(file);
+                student.setBirth_certificate(fileName);
+            } catch (IOException e) {
+                throw new RuntimeException("Failed to upload file: " + e.getMessage());
+            }
+        }
+
+        return studentService.updateStudent(id, student);
     }
+
 
     @DeleteMapping("/delete/{id}")
     public void deleteStudent(@PathVariable Integer id) {

@@ -20,7 +20,7 @@ public class StudentService {
     @Autowired
     private StudentRepo studentRepo;
 
-    private final String uploadDir = "uploads/"; // Directory to save uploaded files
+    private final String uploadDir = "uploads/";
 
     public Student addStudent(Student student) {
         return studentRepo.save(student);
@@ -53,16 +53,14 @@ public class StudentService {
             throw new RuntimeException("Failed to upload file because it is empty.");
         }
 
-        // Ensure the upload directory exists
         File directory = new File(uploadDir);
         if (!directory.exists()) {
             directory.mkdirs();
         }
 
-        // Create a file path to save the uploaded file
         Path filePath = Paths.get(uploadDir + file.getOriginalFilename());
         Files.copy(file.getInputStream(), filePath);
 
-        return file.getOriginalFilename(); // return the file name to store in the database
+        return file.getOriginalFilename();
     }
 }
