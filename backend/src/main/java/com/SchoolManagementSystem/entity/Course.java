@@ -1,5 +1,6 @@
 package com.SchoolManagementSystem.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.util.List;
@@ -15,8 +16,9 @@ public class Course {
     private String code;
     private String description;
 
-    //one course can have many lecturers
+    // One course can have many lecturers
     @OneToMany(mappedBy = "course")
+    @JsonBackReference
     private List<Lecturer> lecturers;
 }
 

@@ -19,8 +19,11 @@ public class LecturerService {
     }
 
     public List<Lecturer> getAllLecturers() {
-        return lecturerRepo.findAll();
+        List<Lecturer> lecturers = lecturerRepo.findAll();
+//        System.out.println("Number of Lecturers Fetched: " + lecturers.size());
+        return lecturers;
     }
+
 
     public Optional<Lecturer> getLecturerById(Integer id) {
         return lecturerRepo.findById(id);
