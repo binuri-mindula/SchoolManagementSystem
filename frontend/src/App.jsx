@@ -9,6 +9,7 @@ import AddCourse from "./pages/Course/AddCourse";
 import AllCourses from "./pages/Course/AllCourses";
 import AssignmentPage from "./pages/assignments/AssignmentPage";
 import EnrollmentPage from "./pages/enrollments/EnrollmentPage";
+import UpdateLecturer from "./pages/Lecturer/UpdateLecturer";
 
 const App = () => {
   return (
@@ -21,7 +22,7 @@ const App = () => {
 
         <Route path="/lecturers" element={<AddLecturer />} />
        <Route path="/alllecturers" element={<AllLecturers />} />
-        <Route path="/updatelecturer/:id" element={<UpdateStudent />} /> 
+        <Route path="/updatelecturer/:id" element={<UpdateLecturer/>} /> 
 
         <Route path="/courses" element={<AddCourse />} />
         <Route path="/allcourses" element={<AllCourses />} />

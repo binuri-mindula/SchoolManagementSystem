@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
@@ -56,8 +56,8 @@ const StudentForm = () => {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="bg-white w-full max-w-lg p-6 rounded-xl shadow-lg">
-        <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Add Student</h2>
+      <div className="w-full max-w-lg p-6 bg-white shadow-lg rounded-xl">
+        <h2 className="mb-6 text-3xl font-bold text-center text-gray-800">Add Student</h2>
 
         {statusMessage && (
           <div
@@ -79,7 +79,7 @@ const StudentForm = () => {
               value={student.name}
               onChange={handleChange}
               required
-              className="mt-1 block w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+              className="block w-full p-3 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -92,7 +92,7 @@ const StudentForm = () => {
               value={student.age}
               onChange={handleChange}
               required
-              className="mt-1 block w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+              className="block w-full p-3 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -105,7 +105,7 @@ const StudentForm = () => {
               value={student.address}
               onChange={handleChange}
               required
-              className="mt-1 block w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+              className="block w-full p-3 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -118,7 +118,7 @@ const StudentForm = () => {
               value={student.gender}
               onChange={handleChange}
               required
-              className="mt-1 block w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+              className="block w-full p-3 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
@@ -129,13 +129,13 @@ const StudentForm = () => {
               accept="application/pdf" 
               onChange={handleFileChange} 
               required
-              className="mt-1 block w-full p-3 rounded-md border border-gray-300 focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
+              className="block w-full p-3 mt-1 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-500"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full py-2 px-6 text-lg font-semibold text-white bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-transform transform hover:scale-105 duration-200"
+            className="w-full px-6 py-2 text-lg font-semibold text-white transition-transform duration-200 transform bg-blue-700 rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 hover:scale-105"
           >
             Add Student
           </button>

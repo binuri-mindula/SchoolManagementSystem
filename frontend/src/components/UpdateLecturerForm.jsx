@@ -2,67 +2,69 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
-const UpdateForm = () => {
+const UpdateLecturerForm = () => {
   const { id } = useParams();
-  const [student, setStudent] = useState({
+  const [lecturer, setLecturer] = useState({
     name: "",
     age: "",
     address: "",
-    gender: ""
+    gender: "",
   });
-  const [birth_certificateFile, setBirth_certificateFile] = useState(null); 
   const [statusMessage, setStatusMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchStudent = async () => {
+    const fetchLecturer = async () => {
       try {
-        const response = await axios.get(`http://localhost:8080/students/${id}`);
-        setStudent(response.data);
+        const response = await axios.get(`http://localhost:8080/lecturers/${id}`);
+        setLecturer(response.data);
       } catch (error) {
-        console.error("Error fetching student data", error);
+        console.error("Error fetching lecturer data", error);
+        setStatusMessage("Failed to fetch lecturer details. Please try again.");
       }
     };
 
-    fetchStudent();
+    fetchLecturer();
   }, [id]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setStudent({ ...student, [name]: value });
-  };
-
-  
-  const handleFileChange = (e) => {
-    setBirth_certificateFile(e.target.files[0]); 
+    setLecturer({ ...lecturer, [name]: value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(); 
-    formData.append("student", JSON.stringify(student)); 
-    if (birth_certificateFile) {
-      formData.append("file", birth_certificateFile); 
-    }
+    setLoading(true);
 
     try {
-      await axios.put(`http://localhost:8080/students/update/${id}`, formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-      setStatusMessage("Student updated successfully!");
-      setTimeout(() => navigate("/students"), 2000);
+        await axios.put(
+            `http://localhost:8080/lecturers/update/${id}`,
+            lecturer, // Sending JSON object
+            {
+              headers: {
+                "Content-Type": "application/json", // Explicitly setting JSON
+              },
+            }
+          
+          
+      );
+      setStatusMessage("Lecturer updated successfully!");
+      setTimeout(() => navigate("/alllecturers"), 2000); // Delay navigation to show success message
     } catch (error) {
-      console.error("Error updating student", error);
-      setStatusMessage("Failed to update student. Please try again.");
+      console.error("Error updating lecturer", error);
+      setStatusMessage("Failed to update lecturer. Please try again.");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
-        <h2 className="mb-6 text-3xl font-bold text-center text-gray-800">Update Student</h2>
+        <h2 className="mb-6 text-3xl font-bold text-center text-gray-800">
+          Update Lecturer
+        </h2>
 
         {statusMessage && (
           <div
@@ -81,7 +83,7 @@ const UpdateForm = () => {
             type="text"
             name="name"
             placeholder="Name"
-            value={student.name}
+            value={lecturer.name}
             onChange={handleChange}
             required
             className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -90,7 +92,7 @@ const UpdateForm = () => {
             type="number"
             name="age"
             placeholder="Age"
-            value={student.age}
+            value={lecturer.age}
             onChange={handleChange}
             required
             className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -99,34 +101,30 @@ const UpdateForm = () => {
             type="text"
             name="address"
             placeholder="Address"
-            value={student.address}
+            value={lecturer.address}
             onChange={handleChange}
             required
             className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <input
-            type="text"
             name="gender"
-            placeholder="Gender"
-            value={student.gender}
+            value={lecturer.gender}
             onChange={handleChange}
             required
             className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <div>
-            {/* <label className="block text-sm font-medium text-gray-700">Birth Certificate (PDF)</label> */}
-            <input
-              type="file"
-              accept="application/pdf" 
-              onChange={handleFileChange} 
-              className="w-full p-3 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
+           
+
           <button
             type="submit"
-            className="w-full py-3 font-bold text-white transition duration-300 bg-blue-600 rounded hover:bg-blue-700"
+            disabled={loading}
+            className={`w-full py-3 font-bold text-white transition duration-300 rounded ${
+              loading
+                ? "bg-gray-400 cursor-not-allowed"
+                : "bg-blue-600 hover:bg-blue-700"
+            }`}
           >
-            Update Student
+            {loading ? "Updating..." : "Update Lecturer"}
           </button>
         </form>
       </div>
@@ -134,4 +132,4 @@ const UpdateForm = () => {
   );
 };
 
-export default UpdateForm;
+export default UpdateLecturerForm;
